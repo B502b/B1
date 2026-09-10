@@ -6,10 +6,20 @@ existing server's map and not affiliated with Rockstar Games / FiveM.
 
 ## Contents
 
-- `precinct24_blockout.py` — a Blender Python script that builds the full
-  4-level 3D blockout (walls with door gaps, floor slabs, a stair/elevator
-  core connecting every level, and one `PROP_*` placeholder Empty per
-  suggested prop) at the same coordinates as the blueprint sheet.
+- `precinct24_blockout.py` — a Blender Python script that builds a
+  furnished, materialed 4-level interior at the same coordinates as the
+  blueprint sheet:
+  - Wall shells with **real openings** — framed doors (with leaves) and
+    window bands with glass panes, not just gaps.
+  - Floor slabs, ceilings and a perimeter **roof parapet**.
+  - A proper **straight-run staircase** with landings and railings in the
+    central core, plus per-floor elevator doors, linking every level.
+  - **Sized proxy furniture** in every room (desks, lockers, shelving,
+    server/gun racks, dispatch consoles, seating, conference tables,
+    holding-cell bars, a rooftop helipad), each anchored by a `PROP_*`
+    empty so you can snap the real asset to it and delete the proxy.
+  - A named **material set** and a **camera + sun rig** so a test render
+    looks presentable straight away.
 
 ## Levels
 
@@ -25,15 +35,17 @@ existing server's map and not affiliated with Rockstar Games / FiveM.
 1. Open Blender → **Scripting** tab → open `precinct24_blockout.py` → **Run Script** (Alt+P).
    Or headless: `blender --background --python precinct24_blockout.py`
 2. Output is organized into a `Precinct24_HQ` collection with one sub-collection
-   per level (`B1`, `L1`, `L2`, `L3`) plus `Roof`, so you can hide levels while you work.
+   per level (`B1`, `L1`, `L2`, `L3`) plus `Roof` and `Rig`, so you can hide
+   levels while you work. Press F12 to render the pre-framed camera view.
 
 ## Finishing it as a working MLO
 
 1. Install the **Sollumz** Blender add-on and load your own legally-owned
    GTA V asset archive (no game assets ship with this script — only the
    blockout geometry and `PROP_*` naming).
-2. Replace every `PROP_*` Empty with the real prop it names (desks, cell
-   bars, gun racks, dispatch consoles, etc.).
+2. Replace every `PROP_*` empty with the real prop it names, then delete
+   the grey proxy mesh next to it (desks, cell bars, gun racks, dispatch
+   consoles, etc.).
 3. Export the dressed interior as `.ydr`/`.ytyp`, then place it with a
    `.ymap` using Sollumz's map-export tools.
 4. Define interior rooms + portals in the ytyp so the game culls floors
